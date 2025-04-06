@@ -24,10 +24,10 @@ export default function Home() {
 
 
             </div>
-            <div className="charts">
+            {/* <div className="charts">
                 <Featured/>
                 <Chart/>
-            </div>
+            </div> */}
             <div className="listContainer">
               <div className="listTitle">Latest Transaction</div>
               <Table/>
