@@ -1,91 +1,193 @@
-import "./sidebar.scss";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import LocalShippingIcon from "@mui/icons-material/LocalShipping";
-import CreditCardIcon from "@mui/icons-material/CreditCard";
-import StoreIcon from "@mui/icons-material/Store";
-import InsertChartIcon from "@mui/icons-material/InsertChart";
-import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
-import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
-import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import { Link } from "react-router-dom";
-// import { DarkModeContext } from "../../context/darkModeContext";
-// import { useContext } from "react";
+import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import {
+  FaHome,
+  FaUser,
+  FaEnvelope,
+  FaChartBar,
+  FaCog,
+  FaBars,
+  FaTimes,
+} from 'react-icons/fa';
 
 const Sidebar = () => {
-  //   const { dispatch } = useContext(DarkModeContext);
+  const [isOpen, setIsOpen] = useState(true);
+  const [activeDropdown, setActiveDropdown] = useState('');
+
+  const toggleSidebar = () => setIsOpen(!isOpen);
+
+  const toggleDropdown = (item) => {
+    setActiveDropdown((prev) => (prev === item ? '' : item));
+  };
+
   return (
-    <div className="sidebar">
-      <div className="top">
-        <Link to="/" style={{ textDecoration: "none" }}>
-          <span className="logo">High Court</span>
-        </Link>
-      </div>
-      <hr />
-      <div className="center">
-        <ul>
-          <p className="title">MAIN</p>
-          <li>
-            <DashboardIcon className="icon" />
-            <span>Dashboard</span>
+    <div className="d-flex">
+      {/* Sidebar */}
+      <div
+        className={`bg-light border-end p-3 ${
+          isOpen ? 'd-block' : 'd-none d-md-block'
+        }`}
+        style={{ width: isOpen ? '250px' : '0px', transition: '0.3s' }}
+      >
+        <h4 className="text-primary d-flex justify-content-between align-items-center">
+          Dashboard
+          <span className="d-md-none" onClick={toggleSidebar} style={{ cursor: 'pointer' }}>
+            <FaTimes />
+          </span>
+        </h4>
+
+        <ul className="nav flex-column mt-4">
+          <li className="nav-item">
+            <a href="#home" className="nav-link text-dark">
+              <FaHome className="me-2" /> Home
+            </a>
           </li>
-          <p className="title">LISTS</p>
-          <Link to="/users" style={{ textDecoration: "none" }}>
-            <li>
-              <PersonOutlineIcon className="icon" />
-              <span>Users</span>
-            </li>
-          </Link>
-          <Link to="/products" style={{ textDecoration: "none" }}>
-            <li>
-              <StoreIcon className="icon" />
-              <span>Products</span>
-            </li>
-          </Link>
-          <li>
-            <CreditCardIcon className="icon" />
-            <span>Orders</span>
+
+          <li className="nav-item">
+            <div
+              className="nav-link text-dark d-flex justify-content-between align-items-center"
+              onClick={() => toggleDropdown('profile')}
+              style={{ cursor: 'pointer' }}
+            >
+              <span>
+                <FaUser className="me-2" /> Profile
+              </span>
+              <span>{activeDropdown === 'profile' ? '▲' : '▼'}</span>
+            </div>
+            {activeDropdown === 'profile' && (
+              <ul className="nav flex-column ms-4">
+                <li className="nav-item">
+                  <a href="#personal" className="nav-link text-dark">
+                    Personal Info
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a href="#settings" className="nav-link text-dark">
+                    Account Settings
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a href="#billing" className="nav-link text-dark">
+                    Billing
+                  </a>
+                </li>
+              </ul>
+            )}
           </li>
-          <li>
-            <LocalShippingIcon className="icon" />
-            <span>Delivery</span>
+
+          
+          <li className="nav-item">
+            <div
+              className="nav-link text-dark d-flex justify-content-between align-items-center"
+              onClick={() => toggleDropdown('profile')}
+              style={{ cursor: 'pointer' }}
+            >
+              <span>
+                <FaUser className="me-2" /> Category
+              </span>
+              <span>{activeDropdown === 'profile' ? '▲' : '▼'}</span>
+            </div>
+            {activeDropdown === 'profile' && (
+              <ul className="nav flex-column ms-4">
+                <li className="nav-item">
+                  <a href="#personal" className="nav-link text-dark">
+                    Personal Info
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a href="#settings" className="nav-link text-dark">
+                    Account Settings
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a href="#billing" className="nav-link text-dark">
+                    Billing
+                  </a>
+                </li>
+              </ul>
+            )}
           </li>
-          <p className="title">USEFUL</p>
-          <li>
-            <InsertChartIcon className="icon" />
-            <span>Stats</span>
+
+          <li className="nav-item">
+            <div
+              className="nav-link text-dark d-flex justify-content-between align-items-center"
+              onClick={() => toggleDropdown('messages')}
+              style={{ cursor: 'pointer' }}
+            >
+              <span>
+                <FaEnvelope className="me-2" /> Messages
+              </span>
+              <span>{activeDropdown === 'messages' ? '▲' : '▼'}</span>
+            </div>
+            {activeDropdown === 'messages' && (
+              <ul className="nav flex-column ms-4">
+                <li className="nav-item">
+                  <a href="#inbox" className="nav-link text-dark">
+                    Inbox
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a href="#sent" className="nav-link text-dark">
+                    Sent
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a href="#drafts" className="nav-link text-dark">
+                    Drafts
+                  </a>
+                </li>
+              </ul>
+            )}
           </li>
-          <li>
-            <NotificationsNoneIcon className="icon" />
-            <span>Notifications</span>
+
+          <li className="nav-item">
+            <a href="#analytics" className="nav-link text-dark">
+              <FaChartBar className="me-2" /> Analytics
+            </a>
           </li>
-          <p className="title">SERVICE</p>
-          <li>
-            <SettingsSystemDaydreamOutlinedIcon className="icon" />
-            <span>System Health</span>
-          </li>
-          <li>
-            <PsychologyOutlinedIcon className="icon" />
-            <span>Logs</span>
-          </li>
-          <li>
-            <SettingsApplicationsIcon className="icon" />
-            <span>Settings</span>
-          </li>
-          <p className="title">USER</p>
-          <li>
-            <AccountCircleOutlinedIcon className="icon" />
-            <span>Profile</span>
-          </li>
-          <li>
-            <ExitToAppIcon className="icon" />
-            <span>Logout</span>
+
+          <li className="nav-item">
+            <div
+              className="nav-link text-dark d-flex justify-content-between align-items-center"
+              onClick={() => toggleDropdown('settings')}
+              style={{ cursor: 'pointer' }}
+            >
+              <span>
+                <FaCog className="me-2" /> Settings
+              </span>
+              <span>{activeDropdown === 'settings' ? '▲' : '▼'}</span>
+            </div>
+            {activeDropdown === 'settings' && (
+              <ul className="nav flex-column ms-4">
+                <li className="nav-item">
+                  <a href="#preferences" className="nav-link text-dark">
+                    Preferences
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a href="#security" className="nav-link text-dark">
+                    Security
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a href="#notifications" className="nav-link text-dark">
+                    Notifications
+                  </a>
+                </li>
+              </ul>
+            )}
           </li>
         </ul>
       </div>
+
+      {/* Toggle Button */}
+      <button
+        className="btn btn-primary d-md-none position-fixed top-0 start-0 m-3"
+        onClick={toggleSidebar}
+      >
+        <FaBars />
+      </button>
     </div>
   );
 };
