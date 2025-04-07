@@ -11,6 +11,7 @@ import New from './Pages/new/New'
 import JudgeDiretory from './components/judge&lawyer/JudgeDiretory'
 import LawyerDirectory from './components/judge&lawyer/LawyerDirectory'
 import Search from "./components/Search"
+import Dashboard from "./components/DashboardLayout"
 
 export default function App() {
   return (
@@ -25,7 +26,8 @@ export default function App() {
 
         <Route path="home">
           <Route path="search" element={<Search/>}/>
-         
+          <Route path="dashboard" element={<Dashboard/>}/>
+          
           
         </Route>
 

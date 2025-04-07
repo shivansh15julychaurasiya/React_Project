@@ -1,41 +1,84 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { PDFViewer } from '@react-pdf/renderer';
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { PDFViewer } from "@react-pdf/renderer";
 // import PdfComponent from './PdfComponent';
-import MyDocument from './pdf/pdf';
-
+import Navbar from "./navbar/Navbar";
+import MyDocument from "./pdf/pdf";
+import FancyAccordion from "./FancyAccordion";
 
 const DashboardLayout = () => {
   return (
-    <div className="container mt-4">
-      <div className="row">
+    <div className="flex">
+      <Navbar />
+      <div className="container-fluid mt-4">
+        <div className="row">
+          {/* Index Column */}
+          <div className="col-md-2">
+            <div className="card">
+              <ul className="list-unstyled">
+                <li> Case Documents</li>
+                <li> Court Orders</li>
+                <li> Hearing Schedule</li>
+                <li> Client Details</li>
+                <ul className="list-unstyled">
+                  <li> Case Files</li>
+                  <li> Judge Details</li>
+                  <li>Client Info</li>
+                  <li>Schedule</li>
+                  <li> Notifications</li>
+                  <li> Notes</li>
+                  <li> Reports</li>
+                  <li> Court Details</li>
+                  <li> History</li>
+                  <li>⬇ Downloads</li>
+                </ul>
+              </ul>
+            </div>
+          </div>
 
-        {/* Index Column */}
-        <div className="col-md-4">
-          <h5>Index</h5>
-          <ul className="list-group">
-            {[1, 2, 3, 4].map((item) => (
-              <li key={item} className="list-group-item">Item #{item}</li>
-            ))}
-          </ul>
-        </div>
+          {/* List Column */}
+          <div className="col-md-4">
+            <div className="card">
+              <font className="font-weight-bold text-dark mt-2 text-center">
+                NABAIL NO 20232 OF 2025
+              </font>
+              <div className="container my-3">
+                <div className="row g-2 justify-content-start flex-wrap">
+                  <div className="col-auto">
+                    <button className="btn btn-success btn-sm">
+                      Stamp Report
+                    </button>
+                  </div>
 
-        {/* List Column */}
-        <div className="col-md-4">
-          <h5>Case List</h5>
-          <ul className="list-group">
-            {['Case A', 'Case B', 'Case C'].map((caseItem, index) => (
-              <li key={index} className="list-group-item">{caseItem}</li>
-            ))}
-          </ul>
-        </div>
+                  <div className="col-auto">
+                    <button className="btn btn-success btn-sm">Notes</button>
+                  </div>
 
-        {/* PDF Preview Column */}
-        <div className="col-md-4">
-          <h5>PDF Preview</h5>
-          <PDFViewer width="100%" height={300}>
-            <MyDocument />
-          </PDFViewer>
+                  <div className="col-auto">
+                    <button className="btn btn-success btn-sm">
+                      View Orders
+                    </button>
+                  </div>
+
+                  <div className="col-auto">
+                    <button className="btn btn-success btn-sm">Reserved</button>
+                  </div>
+
+                  <div className="col-auto">
+                    <button className="btn btn-success btn-sm">Download</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <FancyAccordion />
+          </div>
+
+          {/* PDF Preview Column */}
+          <div className="col-md-6">
+            <PDFViewer width="100%" height={460}>
+              <MyDocument />
+            </PDFViewer>
+          </div>
         </div>
       </div>
     </div>
