@@ -34,44 +34,39 @@ const Sidebar = () => {
         style={{ width: isOpen ? '250px' : '0px', transition: 'width 0.4s ease' }}
       >
         <h4 className="text-primary d-flex justify-content-between align-items-center">
-          Dashboard
+          High Court
           <span className="d-md-none" onClick={toggleSidebar} style={{ cursor: 'pointer' }}>
             <FaTimes />
           </span>
         </h4>
 
         <ul className="nav flex-column mt-4">
-          <li className="nav-item">
-            <a href="#home" className="nav-link text-dark px-3 py-2 rounded hover-effect">
-              <FaHome className="me-2" /> Home
-            </a>
-          </li>
 
           {/* Category Dropdown */}
           <li className="nav-item">
     <div
       className="nav-link text-dark px-3 py-2 rounded d-flex justify-content-between align-items-center hover-effect"
-      onClick={() => toggleDropdown('Category')}
+      onClick={() => toggleDropdown('Home')}
       style={{ cursor: 'pointer' }}
     >
-      <span><FaFileAlt className="me-2" /> Case Management</span>
-      <span>{activeDropdown === 'Category' ? '▲' : '▼'}</span>
+      <span><FaFileAlt className="me-2" /> Home</span>
+      <span>{activeDropdown === 'Home' ? '▲' : '▼'}</span>
     </div>
-    {activeDropdown === 'Category' && (
+    {activeDropdown === 'Home' && (
       <ul className="nav flex-column ms-4">
         <li className="nav-item">
-          <Link to="/cases_mgmt/cases" className="nav-link text-dark px-3 py-2 rounded hover-effect">
-            All Cases
+          <Link to="/home/dashboard" className="nav-link text-dark px-3 py-2 rounded hover-effect">
+            Dashboard
           </Link>
         </li>
         <li className="nav-item">
-          <Link to="/cases_mgmt/newcase" className="nav-link text-dark px-3 py-2 rounded hover-effect">
-            Add New Case
+          <Link to="/home/search" className="nav-link text-dark px-3 py-2 rounded hover-effect">
+            Search
           </Link>
         </li>
         <li className="nav-item">
           <Link to="/cases_mgmt/assignedCase" className="nav-link text-dark px-3 py-2 rounded hover-effect">
-            Assigned Cases
+            Reserved Cases
           </Link>
         </li>
         <li className="nav-item">
@@ -91,8 +86,8 @@ const Sidebar = () => {
     onClick={() => toggleDropdown('messages')}
     style={{ cursor: 'pointer' }}
   >
-    <span><FaBalanceScale className="me-2" /> Judge & Lawyer</span>
-    <span>{activeDropdown === 'messages' ? '▲' : '▼'}</span>
+    <span><FaBalanceScale className="me-2" />List Of Cases</span>
+    <span>{activeDropdown === 'cases' ? '▲' : '▼'}</span>
   </div>
   {activeDropdown === 'messages' && (
     <ul className="nav flex-column ms-4">
@@ -122,7 +117,7 @@ const Sidebar = () => {
               onClick={() => toggleDropdown('client')}
               style={{ cursor: 'pointer' }}
             >
-              <span><FaUserAlt className="me-2" /> Client</span>
+              <span><FaUserAlt className="me-2" /> Transferred Cases</span>
               <span>{activeDropdown === 'client' ? '▲' : '▼'}</span>
             </div>
             {activeDropdown === 'client' && (

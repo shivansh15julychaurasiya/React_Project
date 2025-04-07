@@ -5,12 +5,12 @@ import Login from './Pages/login/Login'
 import List from './Pages/list/List'
 import Single from './Pages/single/Single'
 import New from './Pages/new/New'
-import NewCase from './components/case mangement/NewCase'
-import Cases from './components/case mangement/Cases'
-import AssignedCases from './components/case mangement/AssignedCases'
-import Status from './components/case mangement/Status'
+// import Cases from './components/case mangement/Cases'
+// import AssignedCases from './components/case mangement/AssignedCases'
+// import Status from './components/case mangement/Status'
 import JudgeDiretory from './components/judge&lawyer/JudgeDiretory'
 import LawyerDirectory from './components/judge&lawyer/LawyerDirectory'
+import Search from "./components/Search"
 
 export default function App() {
   return (
@@ -23,12 +23,9 @@ export default function App() {
           <Route path="login" element={<Login/>}/>
         </Route>
 
-        <Route path="cases_mgmt">
-          <Route path="cases" element={<Cases/>}/>
-          {/* <Route path=":userId" element={<Single/>}/> */}
-          <Route path="newcase" element={<NewCase/>}/>
-          <Route path="assignedCase" element={<AssignedCases/>}/>
-          <Route path="status" element={<Status/>}/>
+        <Route path="home">
+          <Route path="search" element={<Search/>}/>
+         
           
         </Route>
 

@@ -8,6 +8,8 @@ import Navbar from '../../components/navbar/Navbar'
 import Featured from '../../components/features/Featured'
 import Table from '../../components/table/Table'
 import Widgets from '../../components/widget/Widgets'
+import MyDocument from '../../components/pdf/pdf'
+import DashboardLayout from '../../components/DashboardLayout'
 
 
 export default function Home() {
@@ -26,6 +28,7 @@ export default function Home() {
             <div className="listContainer">
               <div className="listTitle">Latest Transaction</div>
               <Table/>
+              {/* <DashboardLayout/> */}
             </div>
         </div>
     </div>
