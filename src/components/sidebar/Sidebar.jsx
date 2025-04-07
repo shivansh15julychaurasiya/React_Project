@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 import {
   FaHome,
-  FaUser,
-  FaEnvelope,
+  FaUserAlt,
+  FaCalendarAlt,
+  FaBalanceScale,
   FaChartBar,
   FaCog,
   FaBars,
   FaTimes,
+  FaUsers,
+  FaFileAlt,
+  FaEnvelope
 } from 'react-icons/fa';
 
 const Sidebar = () => {
@@ -25,10 +28,8 @@ const Sidebar = () => {
     <div className="d-flex">
       {/* Sidebar */}
       <div
-        className={`bg-light border-end p-3 ${
-          isOpen ? 'd-block' : 'd-none d-md-block'
-        }`}
-        style={{ width: isOpen ? '250px' : '0px', transition: '0.3s' }}
+        className={`bg-light border-end p-3 ${isOpen ? 'd-block' : 'd-none d-md-block'}`}
+        style={{ width: isOpen ? '250px' : '0px', transition: 'width 0.4s ease' }}
       >
         <h4 className="text-primary d-flex justify-content-between align-items-center">
           Dashboard
@@ -39,142 +40,149 @@ const Sidebar = () => {
 
         <ul className="nav flex-column mt-4">
           <li className="nav-item">
-            <a href="#home" className="nav-link text-dark">
+            <a href="#home" className="nav-link text-dark px-3 py-2 rounded hover-effect">
               <FaHome className="me-2" /> Home
             </a>
           </li>
 
+          {/* Category Dropdown */}
           <li className="nav-item">
             <div
-              className="nav-link text-dark d-flex justify-content-between align-items-center"
-              onClick={() => toggleDropdown('profile')}
-              style={{ cursor: 'pointer' }}
-            >
-              <span>
-                <FaUser className="me-2" /> Profile
-              </span>
-              <span>{activeDropdown === 'profile' ? '▲' : '▼'}</span>
-            </div>
-            {activeDropdown === 'profile' && (
-              <ul className="nav flex-column ms-4">
-                <li className="nav-item">
-                  <a href="#personal" className="nav-link text-dark">
-                    Personal Info
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a href="#settings" className="nav-link text-dark">
-                    Account Settings
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a href="#billing" className="nav-link text-dark">
-                    Billing
-                  </a>
-                </li>
-              </ul>
-            )}
-          </li>
-
-          
-          <li className="nav-item">
-            <div
-              className="nav-link text-dark d-flex justify-content-between align-items-center"
+              className="nav-link text-dark px-3 py-2 rounded d-flex justify-content-between align-items-center hover-effect"
               onClick={() => toggleDropdown('Category')}
               style={{ cursor: 'pointer' }}
             >
-              <span>
-                <FaUser className="me-2" /> Category
-              </span>
+              <span><FaFileAlt className="me-2"  /> Case Management</span>
               <span>{activeDropdown === 'Category' ? '▲' : '▼'}</span>
             </div>
             {activeDropdown === 'Category' && (
               <ul className="nav flex-column ms-4">
-                <li className="nav-item">
-                  <a href="#personal" className="nav-link text-dark">
-                    Personal Info
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a href="#settings" className="nav-link text-dark">
-                    Account Settings
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a href="#billing" className="nav-link text-dark">
-                    Billing
-                  </a>
-                </li>
+                {['All Cases', 'Add New Case', 'Case Category', 'Assigned Cases', 'Case Status '].map((item, idx) => (
+                  <li className="nav-item" key={idx}>
+                    <a href={`#${item.toLowerCase()}`} className="nav-link text-dark px-3 py-2 rounded hover-effect">
+                      {item}
+                    </a>
+                  </li>
+                ))}
               </ul>
             )}
           </li>
 
+          {/* Messages Dropdown */}
           <li className="nav-item">
             <div
-              className="nav-link text-dark d-flex justify-content-between align-items-center"
+              className="nav-link text-dark px-3 py-2 rounded d-flex justify-content-between align-items-center hover-effect"
               onClick={() => toggleDropdown('messages')}
               style={{ cursor: 'pointer' }}
             >
-              <span>
-                <FaEnvelope className="me-2" /> Messages
-              </span>
+              <span><FaBalanceScale className="me-2" /> Judge & Lawyer</span>
               <span>{activeDropdown === 'messages' ? '▲' : '▼'}</span>
             </div>
             {activeDropdown === 'messages' && (
               <ul className="nav flex-column ms-4">
-                <li className="nav-item">
-                  <a href="#inbox" className="nav-link text-dark">
-                    Inbox
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a href="#sent" className="nav-link text-dark">
-                    Sent
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a href="#drafts" className="nav-link text-dark">
-                    Drafts
-                  </a>
-                </li>
+                {['Judge Directory', 'Lawyer Directory', 'Assign Judge/Lawyer'].map((item, idx) => (
+                  <li className="nav-item" key={idx}>
+                    <a href={`#${item.toLowerCase()}`} className="nav-link text-dark px-3 py-2 rounded hover-effect">
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+
+          {/* Profile Dropdown */}
+          <li className="nav-item">
+            <div
+              className="nav-link text-dark px-3 py-2 rounded d-flex justify-content-between align-items-center hover-effect"
+              onClick={() => toggleDropdown('client')}
+              style={{ cursor: 'pointer' }}
+            >
+              <span><FaUserAlt className="me-2" /> Client</span>
+              <span>{activeDropdown === 'client' ? '▲' : '▼'}</span>
+            </div>
+            {activeDropdown === 'client' && (
+              <ul className="nav flex-column ms-4">
+                {['Client List', 'Add New Client', 'Client History'].map((item, idx) => (
+                  <li className="nav-item" key={idx}>
+                    <a href={`#${item.toLowerCase().replace(/\s+/g, '')}`} className="nav-link text-dark px-3 py-2 rounded hover-effect">
+                      {item}
+                    </a>
+                  </li>
+                ))}
               </ul>
             )}
           </li>
 
           <li className="nav-item">
-            <a href="#analytics" className="nav-link text-dark">
+            <a href="#analytics" className="nav-link text-dark px-3 py-2 rounded hover-effect">
               <FaChartBar className="me-2" /> Analytics
             </a>
           </li>
 
+          {/* Settings Dropdown */}
           <li className="nav-item">
             <div
-              className="nav-link text-dark d-flex justify-content-between align-items-center"
-              onClick={() => toggleDropdown('settings')}
+              className="nav-link text-dark px-3 py-2 rounded d-flex justify-content-between align-items-center hover-effect"
+              onClick={() => toggleDropdown('Scheduling')}
               style={{ cursor: 'pointer' }}
             >
-              <span>
-                <FaCog className="me-2" /> Settings
-              </span>
-              <span>{activeDropdown === 'settings' ? '▲' : '▼'}</span>
+              <span><FaCalendarAlt className="me-2" /> Scheduling</span>
+              <span>{activeDropdown === 'Scheduling' ? '▲' : '▼'}</span>
             </div>
-            {activeDropdown === 'settings' && (
+            {activeDropdown === 'Scheduling' && (
               <ul className="nav flex-column ms-4">
-                <li className="nav-item">
-                  <a href="#preferences" className="nav-link text-dark">
-                    Preferences
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a href="#security" className="nav-link text-dark">
-                    Security
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a href="#notifications" className="nav-link text-dark">
-                    Notifications
-                  </a>
-                </li>
+                {['Court Calendar', 'Hearing Schedule', 'Set Appointment'].map((item, idx) => (
+                  <li className="nav-item" key={idx}>
+                    <a href={`#${item.toLowerCase()}`} className="nav-link text-dark px-3 py-2 rounded hover-effect">
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+
+          <li className="nav-item">
+            <div
+              className="nav-link text-dark px-3 py-2 rounded d-flex justify-content-between align-items-center hover-effect"
+              onClick={() => toggleDropdown('Report')}
+              style={{ cursor: 'pointer' }}
+            >
+              <span><FaCog className="me-2" /> Report</span>
+              <span>{activeDropdown === 'Report' ? '▲' : '▼'}</span>
+            </div>
+            {activeDropdown === 'Report' && (
+              <ul className="nav flex-column ms-4">
+                {['Case Report', 'Performance Reports', 'Case Category Report','Date Renage Report'].map((item, idx) => (
+                  <li className="nav-item" key={idx}>
+                    <a href={`#${item.toLowerCase()}`} className="nav-link text-dark px-3 py-2 rounded hover-effect">
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+
+          <li className="nav-item">
+            <div
+              className="nav-link text-dark px-3 py-2 rounded d-flex justify-content-between align-items-center hover-effect"
+              onClick={() => toggleDropdown('Communication')}
+              style={{ cursor: 'pointer' }}
+            >
+              <span><FaEnvelope className="me-2" /> Communication</span>
+              <span>{activeDropdown === 'Communication' ? '▲' : '▼'}</span>
+            </div>
+            {activeDropdown === 'Communication' && (
+              <ul className="nav flex-column ms-4">
+                {['Notification', 'Message', 'Chat Support'].map((item, idx) => (
+                  <li className="nav-item" key={idx}>
+                    <a href={`#${item.toLowerCase()}`} className="nav-link text-dark px-3 py-2 rounded hover-effect">
+                      {item}
+                    </a>
+                  </li>
+                ))}
               </ul>
             )}
           </li>
@@ -188,6 +196,14 @@ const Sidebar = () => {
       >
         <FaBars />
       </button>
+
+      {/* Embedded Bootstrap-style hover effect */}
+      <style>{`
+        .hover-effect:hover {
+          background-color: #f8f9fa;
+          color: #0d6efd !important;
+        }
+      `}</style>
     </div>
   );
 };
