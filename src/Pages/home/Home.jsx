@@ -7,6 +7,7 @@ import Sidebar from '../../components/sidebar/Sidebar'
 import Navbar from '../../components/navbar/Navbar'
 import Featured from '../../components/features/Featured'
 import Table from '../../components/table/Table'
+import Widgets from '../../components/widget/Widgets'
 
 
 export default function Home() {
@@ -15,15 +16,9 @@ export default function Home() {
         <Sidebar/>
         <div className="homeContainer">
             <Navbar/>
-            <div className="widgets">
-                {/* <Widget type="widgets"/> */}
-                <Widget type="user"/>
-                <Widget type="order"/>
-                <Widget type="earning"/>
-                <Widget type="balance"/>
-
-
-            </div>
+            <Widgets/>
+           
+            
             {/* <div className="charts">
                 <Featured/>
                 <Chart/>

@@ -3,13 +3,16 @@ import { FaBell, FaUserCircle, FaSearch } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // Import Bootstrap JavaScript (needs Popper.js too)
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import "@fortawesome/fontawesome-free/css/all.min.css";
+
 
 
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm px-4 py-2">
       <a className="navbar-brand fw-bold text-primary" href="/">
-        MyApp
+      <i className="fas fa-gavel"></i>  {/* Court-related icon (gavel) */}
+      High-Court
       </a>
 
       <button

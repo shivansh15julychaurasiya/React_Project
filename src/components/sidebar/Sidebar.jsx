@@ -80,15 +80,15 @@ const Sidebar = () => {
           <li className="nav-item">
             <div
               className="nav-link text-dark d-flex justify-content-between align-items-center"
-              onClick={() => toggleDropdown('profile')}
+              onClick={() => toggleDropdown('Category')}
               style={{ cursor: 'pointer' }}
             >
               <span>
                 <FaUser className="me-2" /> Category
               </span>
-              <span>{activeDropdown === 'profile' ? '▲' : '▼'}</span>
+              <span>{activeDropdown === 'Category' ? '▲' : '▼'}</span>
             </div>
-            {activeDropdown === 'profile' && (
+            {activeDropdown === 'Category' && (
               <ul className="nav flex-column ms-4">
                 <li className="nav-item">
                   <a href="#personal" className="nav-link text-dark">
