@@ -1,6 +1,6 @@
 import React from 'react'
 import "./home.scss"
-import Chart from '../../components/chart/Chart'
+// import Chart from '../../components/chart/Chart'
 // import Featured from '../../components/features/Featured'
 import Widget from '../../components/widget/Widget'
 import Sidebar from '../../components/sidebar/Sidebar'

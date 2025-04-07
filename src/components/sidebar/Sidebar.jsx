@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from 'react-router-dom';
+
 import {
   FaHome,
   FaUserAlt,
@@ -47,49 +49,71 @@ const Sidebar = () => {
 
           {/* Category Dropdown */}
           <li className="nav-item">
-            <div
-              className="nav-link text-dark px-3 py-2 rounded d-flex justify-content-between align-items-center hover-effect"
-              onClick={() => toggleDropdown('Category')}
-              style={{ cursor: 'pointer' }}
-            >
-              <span><FaFileAlt className="me-2"  /> Case Management</span>
-              <span>{activeDropdown === 'Category' ? '▲' : '▼'}</span>
-            </div>
-            {activeDropdown === 'Category' && (
-              <ul className="nav flex-column ms-4">
-                {['All Cases', 'Add New Case', 'Case Category', 'Assigned Cases', 'Case Status '].map((item, idx) => (
-                  <li className="nav-item" key={idx}>
-                    <a href={`#${item.toLowerCase()}`} className="nav-link text-dark px-3 py-2 rounded hover-effect">
-                      {item}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </li>
+    <div
+      className="nav-link text-dark px-3 py-2 rounded d-flex justify-content-between align-items-center hover-effect"
+      onClick={() => toggleDropdown('Category')}
+      style={{ cursor: 'pointer' }}
+    >
+      <span><FaFileAlt className="me-2" /> Case Management</span>
+      <span>{activeDropdown === 'Category' ? '▲' : '▼'}</span>
+    </div>
+    {activeDropdown === 'Category' && (
+      <ul className="nav flex-column ms-4">
+        <li className="nav-item">
+          <Link to="/cases_mgmt/cases" className="nav-link text-dark px-3 py-2 rounded hover-effect">
+            All Cases
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link to="/cases_mgmt/newcase" className="nav-link text-dark px-3 py-2 rounded hover-effect">
+            Add New Case
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link to="/cases_mgmt/assignedCase" className="nav-link text-dark px-3 py-2 rounded hover-effect">
+            Assigned Cases
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link to="/cases_mgmt/status" className="nav-link text-dark px-3 py-2 rounded hover-effect">
+            Status
+          </Link>
+        </li>
+        {/* Add more Link items similarly */}
+      </ul>
+    )}
+  </li>
 
-          {/* Messages Dropdown */}
-          <li className="nav-item">
-            <div
-              className="nav-link text-dark px-3 py-2 rounded d-flex justify-content-between align-items-center hover-effect"
-              onClick={() => toggleDropdown('messages')}
-              style={{ cursor: 'pointer' }}
-            >
-              <span><FaBalanceScale className="me-2" /> Judge & Lawyer</span>
-              <span>{activeDropdown === 'messages' ? '▲' : '▼'}</span>
-            </div>
-            {activeDropdown === 'messages' && (
-              <ul className="nav flex-column ms-4">
-                {['Judge Directory', 'Lawyer Directory', 'Assign Judge/Lawyer'].map((item, idx) => (
-                  <li className="nav-item" key={idx}>
-                    <a href={`#${item.toLowerCase()}`} className="nav-link text-dark px-3 py-2 rounded hover-effect">
-                      {item}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </li>
+       {/* Messages Dropdown */}
+<li className="nav-item">
+  <div
+    className="nav-link text-dark px-3 py-2 rounded d-flex justify-content-between align-items-center hover-effect"
+    onClick={() => toggleDropdown('messages')}
+    style={{ cursor: 'pointer' }}
+  >
+    <span><FaBalanceScale className="me-2" /> Judge & Lawyer</span>
+    <span>{activeDropdown === 'messages' ? '▲' : '▼'}</span>
+  </div>
+  {activeDropdown === 'messages' && (
+    <ul className="nav flex-column ms-4">
+      <li className="nav-item">
+        <Link to="/judge_lawyer/judgeDirectory" className="nav-link text-dark px-3 py-2 rounded hover-effect">
+          Judge Directory
+        </Link>
+      </li>
+      <li className="nav-item">
+        <Link to="judge_lawyer/lawyerDirectory" className="nav-link text-dark px-3 py-2 rounded hover-effect">
+          Lawyer Directory
+        </Link>
+      </li>
+      <li className="nav-item">
+        <Link to="/assign-judge-lawyer" className="nav-link text-dark px-3 py-2 rounded hover-effect">
+          Assign Judge/Lawyer
+        </Link>
+      </li>
+    </ul>
+  )}
+</li>
 
           {/* Profile Dropdown */}
           <li className="nav-item">
