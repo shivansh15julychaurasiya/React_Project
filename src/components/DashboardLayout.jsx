@@ -1,11 +1,12 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { PDFViewer } from "@react-pdf/renderer";
+// import { PDFViewer } from "@react-pdf/renderer";
 // import PdfComponent from './PdfComponent';
 import Navbar from "./navbar/Navbar";
 import MyDocument from "./pdf/pdf";
 import FancyAccordion from "./FancyAccordion";
 import PDFHighlighter from "./pdf/PDFHighlighter";
+import PDFViewer from "./pdf/PDFViewer";
 
 const DashboardLayout = () => {
   return (
@@ -76,7 +77,9 @@ const DashboardLayout = () => {
 
           {/* PDF Preview Column */}
           <div className="col-md-6">
-          <PDFHighlighter pdfUrl="/sample.pdf" />
+          {/* <PDFHighlighter pdfUrl="/sample.pdf" /> */}
+          <PDFViewer/>
+          
 
           </div>
         </div>

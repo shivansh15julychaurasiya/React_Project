@@ -14,6 +14,7 @@ const PDFHighlighter = ({ pdfUrl }) => {
   const [searchText, setSearchText] = useState("");
   const [highlights, setHighlights] = useState({});
 
+  // Load the PDF
   useEffect(() => {
     const loadPDF = async () => {
       if (!pdfUrl) {
@@ -30,56 +31,97 @@ const PDFHighlighter = ({ pdfUrl }) => {
         const saved = localStorage.getItem("pdf-highlights");
         if (saved) setHighlights(JSON.parse(saved));
 
-        renderPage(pdfDoc, currentPage);
+        await renderPage(pdfDoc, currentPage);
       } catch (err) {
         console.error("Error loading PDF:", err);
       }
     };
 
-    loadPDF();
-  }, [pdfUrl]);
+    const renderPage = async (pdfDoc, pageNumber) => {
+      const page = await pdfDoc.getPage(pageNumber);
+      const viewport = page.getViewport({ scale: 1.5 });
 
-  useEffect(() => {
-    if (pdf) renderPage(pdf, currentPage);
-  }, [currentPage, pdf]);
+      const canvas = canvasRef.current;
+      const context = canvas.getContext("2d");
+      canvas.height = viewport.height;
+      canvas.width = viewport.width;
 
-  const renderPage = async (pdfDoc, pageNumber) => {
-    const page = await pdfDoc.getPage(pageNumber);
-    const viewport = page.getViewport({ scale: 1.5 });
+      await page.render({ canvasContext: context, viewport }).promise;
 
-    const canvas = canvasRef.current;
-    const context = canvas.getContext("2d");
-    canvas.height = viewport.height;
-    canvas.width = viewport.width;
+      const textLayerDiv = textLayerRef.current;
+      textLayerDiv.innerHTML = "";
+      const textContent = await page.getTextContent();
 
-    await page.render({ canvasContext: context, viewport }).promise;
-
-    const textLayerDiv = textLayerRef.current;
-    textLayerDiv.innerHTML = "";
-    const textContent = await page.getTextContent();
-
-    pdfjsLib.renderTextLayer({
-      textContent,
-      container: textLayerDiv,
-      viewport,
-      textDivs: [],
-      enhanceTextSelection: true
-    });
-
-    // Re-apply highlights
-    setTimeout(() => {
-      const savedHighlights = highlights[pageNumber] || [];
-      savedHighlights.forEach(({ text }) => {
-        [...textLayerDiv.childNodes].forEach((child) => {
-          const regex = new RegExp(`(${text})`, "gi");
-          child.innerHTML = child.textContent.replace(
-            regex,
-            '<mark style="background-color: yellow;">$1</mark>'
-          );
-        });
+      pdfjsLib.renderTextLayer({
+        textContent,
+        container: textLayerDiv,
+        viewport,
+        textDivs: [],
+        enhanceTextSelection: true
       });
-    }, 500);
-  };
+
+      // Re-apply highlights
+      setTimeout(() => {
+        const savedHighlights = highlights[pageNumber] || [];
+        savedHighlights.forEach(({ text }) => {
+          [...textLayerDiv.childNodes].forEach((child) => {
+            const regex = new RegExp(`(${text})`, "gi");
+            child.innerHTML = child.textContent.replace(
+              regex,
+              '<mark style="background-color: yellow;">$1</mark>'
+            );
+          });
+        });
+      }, 500);
+    };
+
+    loadPDF();
+  }, [pdfUrl, currentPage, highlights]);
+
+  // Render page on page change
+  useEffect(() => {
+    if (!pdf) return;
+
+    const renderPage = async () => {
+      const page = await pdf.getPage(currentPage);
+      const viewport = page.getViewport({ scale: 1.5 });
+
+      const canvas = canvasRef.current;
+      const context = canvas.getContext("2d");
+      canvas.height = viewport.height;
+      canvas.width = viewport.width;
+
+      await page.render({ canvasContext: context, viewport }).promise;
+
+      const textLayerDiv = textLayerRef.current;
+      textLayerDiv.innerHTML = "";
+      const textContent = await page.getTextContent();
+
+      pdfjsLib.renderTextLayer({
+        textContent,
+        container: textLayerDiv,
+        viewport,
+        textDivs: [],
+        enhanceTextSelection: true
+      });
+
+      // Re-apply highlights
+      setTimeout(() => {
+        const savedHighlights = highlights[currentPage] || [];
+        savedHighlights.forEach(({ text }) => {
+          [...textLayerDiv.childNodes].forEach((child) => {
+            const regex = new RegExp(`(${text})`, "gi");
+            child.innerHTML = child.textContent.replace(
+              regex,
+              '<mark style="background-color: yellow;">$1</mark>'
+            );
+          });
+        });
+      }, 500);
+    };
+
+    renderPage();
+  }, [currentPage, pdf, highlights]);
 
   const handleHighlight = () => {
     const selection = window.getSelection();
@@ -95,7 +137,6 @@ const PDFHighlighter = ({ pdfUrl }) => {
       };
       setHighlights(updated);
       localStorage.setItem("pdf-highlights", JSON.stringify(updated));
-      renderPage(pdf, currentPage);
     }
   };
 
@@ -139,7 +180,7 @@ const PDFHighlighter = ({ pdfUrl }) => {
         />
       </div>
 
-      <div style={{ marginTop: "10px ", marginLeft:"45px" }}>
+      <div style={{ marginTop: "10px", marginLeft: "45px" }}>
         <button onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}>
           Prev
         </button>
@@ -157,7 +198,7 @@ const PDFHighlighter = ({ pdfUrl }) => {
         </button>
       </div>
 
-      <div style={{ marginTop: "10px" ,marginLeft:"45px" }}>
+      <div style={{ marginTop: "10px", marginLeft: "45px" }}>
         <input
           type="text"
           placeholder="Search text"

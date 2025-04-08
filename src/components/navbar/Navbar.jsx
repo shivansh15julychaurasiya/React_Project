@@ -27,8 +27,8 @@ const Navbar = () => {
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm px-4">
         <div className="container-fluid d-flex justify-content-between align-items-center">
-          <a className="navbar-brand fw-bold" href="#">
-            {/* Case Manager */}
+          <a className="navbar-brand fw-bold text-primary mx-5"  href="#">
+            {/* Case Manager */} Hight Court
           </a>
 
           <div className="d-flex align-items-center gap-3">
