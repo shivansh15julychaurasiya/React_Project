@@ -27,7 +27,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="d-flex">
+    <div className="d-flex ">
       {/* Sidebar */}
       <div
         className={`bg-light border-end p-3 ${

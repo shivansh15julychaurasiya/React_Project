@@ -12,11 +12,10 @@ const Navbar = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Format: Monday, 07 April 2025, 10:32:15 AM
   const formattedDateTime = currentDateTime.toLocaleString("en-US", {
-    weekday: "long",      // Sunday, Monday...
+    weekday: "long",
     year: "numeric",
-    month: "long",        // January, February...
+    month: "long",
     day: "2-digit",
     hour: "2-digit",
     minute: "2-digit",
@@ -25,22 +24,24 @@ const Navbar = () => {
   });
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light rounded shadow-sm px-4 mb-1">
-      <div className="container-fluid d-flex justify-content-between align-items-center">
-        {/* Left: Brand */}
-        <a className="navbar-brand fw-bold" href="#">
-          {/* Case Manager */}
-        </a>
+    <>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm px-4">
+        <div className="container-fluid d-flex justify-content-between align-items-center">
+          <a className="navbar-brand fw-bold" href="#">
+            {/* Case Manager */}
+          </a>
 
-        {/* Right: Date/Time and Profile */}
-        <div className="d-flex align-items-center gap-3">
-          <span className="text-muted small">{formattedDateTime}</span>
-          <FaUserCircle size={28} className="text-primary" />
-        E-High Court
-
+          <div className="d-flex align-items-center gap-3">
+            <span className="text-muted small">{formattedDateTime}</span>
+            <FaUserCircle size={28} className="text-primary" />
+            E-High Court
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+
+      {/* Spacer to avoid overlap */}
+      <div style={{ height: "70px" }}></div>
+    </>
   );
 };
 

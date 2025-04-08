@@ -18,7 +18,7 @@ export default function Home() {
       <Sidebar />
       <div className="homeContainer">
         <Navbar />
-        <Widgets />
+        <Widgets className="mt-5" />
 
         {/* <div className="charts">
                 <Featured/>

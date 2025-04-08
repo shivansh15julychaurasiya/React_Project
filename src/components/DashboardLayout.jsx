@@ -5,6 +5,7 @@ import { PDFViewer } from "@react-pdf/renderer";
 import Navbar from "./navbar/Navbar";
 import MyDocument from "./pdf/pdf";
 import FancyAccordion from "./FancyAccordion";
+import PDFHighlighter from "./pdf/PDFHighlighter";
 
 const DashboardLayout = () => {
   return (
@@ -75,9 +76,8 @@ const DashboardLayout = () => {
 
           {/* PDF Preview Column */}
           <div className="col-md-6">
-            <PDFViewer width="100%" height={460}>
-              <MyDocument />
-            </PDFViewer>
+          <PDFHighlighter pdfUrl="/sample.pdf" />
+
           </div>
         </div>
       </div>
