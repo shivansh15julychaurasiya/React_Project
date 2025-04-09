@@ -33,15 +33,15 @@ export default function List() {
     <>
       <TableContainer component={Paper} className="table">
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell className="tableCell">Tracking ID</TableCell>
-              <TableCell className="tableCell">Image</TableCell>
-              <TableCell className="tableCell">Price</TableCell>
-              <TableCell className="tableCell">Description</TableCell>
-              <TableCell className="tableCell">Category</TableCell>
-              <TableCell className="tableCell">Product</TableCell>
-              <TableCell className="tableCell">Rating</TableCell>
+          <TableHead >
+            <TableRow className="bg-secondary ">
+              <TableCell className="tableCell text-light font-weight-bold">SR.NO</TableCell>
+              <TableCell className="tableCell text-light font-weight-bold">Image</TableCell>
+              <TableCell className="tableCell text-light font-weight-bold">Price</TableCell>
+              <TableCell className="tableCell text-light font-weight-bold">Description</TableCell>
+              <TableCell className="tableCell text-light font-weight-bold">Category</TableCell>
+              <TableCell className="tableCell text-light font-weight-bold">Product</TableCell>
+              <TableCell className="tableCell text-light font-weight-bold">Rating</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

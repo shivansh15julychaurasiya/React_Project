@@ -21,11 +21,11 @@ const ProfileCard = () => {
 
           <div className="d-flex gap-2">
             <button className="btn btn-primary px-4 rounded-pill">
-              <i class="bi bi-box-arrow-right p-2"></i>
+              <i className="bi bi-box-arrow-right p-2"></i>
                 Log-out
             </button>
             <button className="btn btn-success px-4 rounded-pill"> 
-              <i class="bi bi-pencil p-2"></i>
+              <i className="bi bi-pencil p-2"></i>
                 Edit Profile
              </button>
           </div>

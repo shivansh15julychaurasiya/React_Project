@@ -36,7 +36,7 @@ const Navbar = () => {
           </a>
 
           <div className="d-flex align-items-center gap-3">
-            <span className=" font-weight-bold text-dark">{formattedDateTime}</span>
+            <span className=" small  font-weight-bold text-dark">{formattedDateTime}</span>
 
             {/* Button to trigger modal */}
             <button

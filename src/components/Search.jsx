@@ -26,13 +26,13 @@ const Search = () => {
 
         {/* Main Content */}
         <div className="container-fluid p-4 ">
-          <div className="header bg-dark mt-2 py-2">
+          <div className="header bg-dark mt-2 py-2 rounded">
             <h className="text-light  mt-2 mb-2 px-3">Search Cause List</h>
           </div>
 
           <div class="container mt-4">
             <form>
-              <div class="row g-3 align-items-center">
+              <div class="row g-3 align-items-center ">
                 {/* <!-- Select Type --> */}
                 <div class="col-md-3 col-sm-6">
                   <select id="typeSelect" class="form-select">
@@ -73,9 +73,9 @@ const Search = () => {
           </div>
 
           {/* Table */}
-          <div className="table-responsive mt-3">
-            <table className="table table-bordered table-striped">
-              <thead className="table-secondary">
+          <div className="table-responsive mt-3 rounded">
+            <table className="table table-bordered table-striped rounded">
+              <thead className="table-secondary rounded">
                 <tr>
                   <th>Sr No</th>
                   <th>Case No</th>

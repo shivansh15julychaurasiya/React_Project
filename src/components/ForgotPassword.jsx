@@ -1,0 +1,83 @@
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
+import { Link } from "react-router-dom";
+
+const ForgotPassword = () => {
+  const wrapperStyle = {
+    height: "100vh",
+    backgroundImage:
+      "url('https://as2.ftcdn.net/jpg/06/12/69/39/1000_F_612693965_Ic0XfvkMa44xQXHA8lonULgqoEzyS0Xl.jpg')",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  };
+
+  const cardStyle = {
+    backgroundColor: "rgba(255, 255, 255, 0.95)",
+    padding: "2rem",
+    borderRadius: "1.5rem",
+    maxWidth: "400px",
+    width: "100%",
+    boxShadow: "0 4px 20px rgba(0, 0, 0, 0.3)",
+  };
+
+  const btnStyle = {
+    backgroundColor: "#ff6b6b",
+    border: "none",
+  };
+
+  const btnHoverStyle = {
+    backgroundColor: "#e64949",
+  };
+
+  return (
+    <div style={wrapperStyle}>
+      <div style={cardStyle}>
+        <h2 className="text-center mb-4">
+          <i className="bi bi-unlock me-2"></i>Forgot Password
+        </h2>
+        <p className="text-muted text-center mb-4">
+          Enter your email to receive password reset instructions.
+        </p>
+        <form>
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label">
+              Email address
+            </label>
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              placeholder="Enter email"
+            />
+          </div>
+          <div className="d-grid">
+            <button
+              type="submit"
+              className="btn btn-danger"
+              style={btnStyle}
+              onMouseOver={(e) =>
+                (e.target.style.backgroundColor = btnHoverStyle.backgroundColor)
+              }
+              onMouseOut={(e) =>
+                (e.target.style.backgroundColor = btnStyle.backgroundColor)
+              }
+            >
+              <i className="bi bi-envelope-arrow-up me-1"></i> Send Reset Link
+            </button>
+          </div>
+          <div className="text-center mt-3">
+            <Link to="/home/login" className="text-decoration-none">
+              <i className="bi bi-arrow-left me-1"></i> Back to Login
+            </Link>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default ForgotPassword;
