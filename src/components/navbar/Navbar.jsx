@@ -65,10 +65,10 @@ const Navbar = () => {
         aria-labelledby="profileModalLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog modal-dialog-centered">
+        <div className="modal-dialog modal-dialog-centered ">
           <div className="modal-content border-0 shadow">
-            <div className="modal-header border-0">
-              <h5 className="modal-title fw-bold" id="profileModalLabel">
+            <div className="modal-header border-0 ">
+              <h5 className="modal-title fw-bold text-center" id="profileModalLabel">
                 User Profile
               </h5>
               <button

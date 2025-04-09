@@ -15,6 +15,7 @@ import Search from "./components/Search";
 import Dashboard from "./components/DashboardLayout";
 import PDFViewer from "./components/pdf/PDFViewer";
 import ForgotPassword from "./components/ForgotPassword";
+import EditProfile from "./components/EditProfile";
 // import { imageListClasses } from "@mui/material";
 
 export default function App() {
@@ -35,6 +36,8 @@ export default function App() {
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="login" element={<Login />} />
             <Route path="forgot" element={<ForgotPassword />} />
+            <Route path="editprofile" element={<EditProfile/>} />
+
           </Route>
 
           <Route path="judge_lawyer">

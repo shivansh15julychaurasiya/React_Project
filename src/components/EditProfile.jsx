@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { Link } from "react-router-dom";
 
-const Login = () => {
+const EditProfile = () => {
   const wrapperStyle = {
     height: "100vh",
     backgroundImage:
@@ -19,7 +19,7 @@ const Login = () => {
     backgroundColor: "rgba(255, 255, 255, 0.95)",
     padding: "2rem",
     borderRadius: "1.5rem",
-    maxWidth: "400px",
+    maxWidth: "500px",
     width: "100%",
     boxShadow: "0 4px 20px rgba(0, 0, 0, 0.3)",
   };
@@ -37,12 +37,23 @@ const Login = () => {
     <div style={wrapperStyle}>
       <div style={cardStyle}>
         <h2 className="text-center mb-4">
-          <i className="bi bi-person-circle me-2"></i>Login
+          <i className="bi bi-pencil-square me-2"></i>Edit Profile
         </h2>
         <form>
           <div className="mb-3">
+            <label htmlFor="name" className="form-label">
+              Full Name
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="name"
+              placeholder="Enter full name"
+            />
+          </div>
+          <div className="mb-3">
             <label htmlFor="email" className="form-label">
-              Email address
+              Email Address
             </label>
             <input
               type="email"
@@ -53,13 +64,13 @@ const Login = () => {
           </div>
           <div className="mb-3">
             <label htmlFor="password" className="form-label">
-              Password
+              New Password
             </label>
             <input
               type="password"
               className="form-control"
               id="password"
-              placeholder="Enter password"
+              placeholder="Enter new password"
             />
           </div>
           <div className="d-grid">
@@ -74,12 +85,12 @@ const Login = () => {
                 (e.target.style.backgroundColor = btnStyle.backgroundColor)
               }
             >
-              <i className="bi bi-box-arrow-in-right me-1"></i> Login
+              <i className="bi bi-save me-1"></i> Save Changes
             </button>
           </div>
           <div className="text-center mt-3">
-            <Link to="/home/forgot" className="text-decoration-none">
-              Forgot Password?
+            <Link to="/home" className="text-decoration-none">
+              <i className="bi bi-arrow-left-circle me-1"></i>Back to Home
             </Link>
           </div>
         </form>
@@ -88,4 +99,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default EditProfile;
