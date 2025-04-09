@@ -77,7 +77,7 @@ const Login = () => {
               <i className="bi bi-box-arrow-in-right me-1"></i> Login
             </button>
           </div>
-          <div className="text-center mt-3">
+          <div className="text-center mt-3 text-light">
             <Link to="/home/forgot" className="text-decoration-none">
               Forgot Password?
             </Link>

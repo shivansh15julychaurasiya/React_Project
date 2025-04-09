@@ -3,8 +3,6 @@ import Home from "./Pages/home/Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import Login from "./Pages/login/Login";
 import List from "./Pages/list/List";
-import Single from "./Pages/single/Single";
-import New from "./Pages/new/New";
 import Login from "./components/Login";
 // import Cases from './components/case mangement/Cases'
 // import AssignedCases from './components/case mangement/AssignedCases'
@@ -46,11 +44,11 @@ export default function App() {
             <Route path="lawyerDirectory" element={<LawyerDirectory />} />
           </Route>
 
-          <Route path="products">
+          {/* <Route path="products">
             <Route index element={<List />} />
             <Route path=":productId" element={<Single />} />
             <Route path="new" element={<New />} />
-          </Route>
+          </Route> */}
         </Routes>
       </BrowserRouter>
     </div>
