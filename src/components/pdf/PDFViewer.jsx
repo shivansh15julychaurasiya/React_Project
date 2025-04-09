@@ -24,7 +24,7 @@ const PDFViewer = () => {
   return (
     <div style={{ height: "100vh", width: "100%" }}>
       <Viewer
-        fileUrl="/sample.pdf" // Make sure the file is in public/ folder
+        fileUrl="/Sample.pdf" // Make sure the file is in public/ folder
         plugins={[
           defaultLayoutPluginInstance,
           highlightPluginInstance,

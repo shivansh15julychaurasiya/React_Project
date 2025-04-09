@@ -13,10 +13,10 @@ const DashboardLayout = () => {
     <div className="flex">
       <Navbar />
       <div className="container-fluid mt-4">
-        <div className="row">
+        <div className="row ">
           {/* Index Column */}
           <div className="col-md-2">
-            <div className="card">
+            <div className="card justify-content-center text-center ">
               <ul className="list-unstyled">
                 <li> Case Documents</li>
                 <li> Court Orders</li>
