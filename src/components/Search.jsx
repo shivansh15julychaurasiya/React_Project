@@ -30,7 +30,7 @@ const Search = () => {
             <h className="text-light  mt-2 mb-2 px-3">Search Cause List</h>
           </div>
 
-          <div class="container mt-4">
+          <div class="container  mt-4">
             <form>
               <div class="row g-3 align-items-center ">
                 {/* <!-- Select Type --> */}
@@ -75,7 +75,7 @@ const Search = () => {
           {/* Table */}
           <div className="table-responsive mt-3 rounded">
             <table className="table table-bordered table-striped rounded">
-              <thead className="table-secondary rounded">
+              <thead className="table-secondary rounded text-center ">
                 <tr>
                   <th>Sr No</th>
                   <th>Case No</th>
@@ -84,6 +84,15 @@ const Search = () => {
                   <th>Petitioner Council</th>
                 </tr>
               </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>232</td>
+                  <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, suscipit.</td>
+                  <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</td>
+                  <td>Lorem ipsum dolor sit amet.</td>
+                </tr>
+              </tbody>
             </table>
           </div>
         </div>
