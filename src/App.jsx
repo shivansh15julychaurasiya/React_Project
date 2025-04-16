@@ -15,6 +15,8 @@ import PDFViewer from "./components/pdf/PDFViewer";
 import ForgotPassword from "./components/ForgotPassword";
 import EditProfile from "./components/EditProfile";
 import ManageCauseList from "./components/ManageCauseList";
+import Register from "./components/Register";
+import UserDashboard from "./components/UserDashboard";
 // import { imageListClasses } from "@mui/material";
 
 export default function App() {
@@ -37,15 +39,19 @@ export default function App() {
             <Route path="forgot" element={<ForgotPassword />} />
             <Route path="editprofile" element={<EditProfile/>} />
             <Route path="managecauselist" element={<ManageCauseList/>} />
+            <Route path="register" element={<Register />} />
+            <Route path="userdashboard" element={<UserDashboard />} />
+
+
 
 
           </Route>
 
-          <Route path="judge_lawyer">
+          {/* <Route path="judge_lawyer">
             <Route path="judgeDirectory" element={<JudgeDiretory />} />
-            {/* <Route path=":userId" element={<Single/>}/> */}
+            <Route path=":userId" element={<Single/>}/>
             <Route path="lawyerDirectory" element={<LawyerDirectory />} />
-          </Route>
+          </Route> */}
 
           {/* <Route path="products">
             <Route index element={<List />} />
