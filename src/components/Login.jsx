@@ -32,8 +32,7 @@ const Login = () => {
       const data = await res.json();
       localStorage.setItem("token", data.token); // Store JWT in localStorage
 
-      console.log( localStorage.getItem("token"))
-      
+      console.log(localStorage.getItem("token"));
 
       // Redirect or show success
       navigate("/home/userdashboard"); // Or any secured route
@@ -125,17 +124,23 @@ const Login = () => {
               <i className="bi bi-box-arrow-in-right me-1"></i> Login
             </button>
           </div>
+          <div className="d-grid mt-2">
+            <Link to="/home/login-otp" className="btn btn-outline-secondary">
+              <i className="bi bi-envelope-open me-1"></i> Login with OTP
+            </Link>
+          </div>
           <div className="text-center mt-3 text-light">
             <Link to="/home/forgot" className="text-decoration-none">
               Forgot Password?
             </Link>
           </div>
-          <div className="text-center mt-2 text-dark">
+
+          {/* <div className="text-center mt-2 text-dark">
             Don't have an account?{" "}
             <Link to="/home/register" className="text-decoration-none fw-bold">
               Register
             </Link>
-          </div>
+          </div> */}
         </form>
       </div>
     </div>
