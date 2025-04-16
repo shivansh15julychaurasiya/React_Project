@@ -14,7 +14,10 @@ const UserDashboard = () => {
 
   const usersPerPage = 5;
 
+
   const fetchUsers = async () => {
+
+   
     try {
       const res = await fetch("http://localhost:8081/dms/users/", {
         headers: {
@@ -103,7 +106,15 @@ const UserDashboard = () => {
   };
 
   useEffect(() => {
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      window.location.href = "/home/login"; // or "/login" if that's your actual route
+    }
+   else{
+
     fetchUsers();
+   }
   }, []);
 
   const indexOfLastUser = currentPage * usersPerPage;

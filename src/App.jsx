@@ -7,8 +7,7 @@ import Login from "./components/Login";
 // import Cases from './components/case mangement/Cases'
 // import AssignedCases from './components/case mangement/AssignedCases'
 // import Status from './components/case mangement/Status'
-import JudgeDiretory from "./components/judge&lawyer/JudgeDiretory";
-import LawyerDirectory from "./components/judge&lawyer/LawyerDirectory";
+
 import Search from "./components/Search";
 import Dashboard from "./components/DashboardLayout";
 import PDFViewer from "./components/pdf/PDFViewer";
@@ -29,7 +28,7 @@ export default function App() {
         </Routes> */}
         <Routes>
           <Route path="/">
-            <Route index element={<Home />} />
+            <Route index element={<Login/>} />
           </Route>
 
           <Route path="home">
