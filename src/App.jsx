@@ -29,6 +29,8 @@ export default function App() {
         <Routes>
           <Route path="/">
             <Route index element={<Login/>} />
+            <Route path="home" element={<Home/>} />
+
           </Route>
 
           <Route path="home">
@@ -40,10 +42,6 @@ export default function App() {
             <Route path="managecauselist" element={<ManageCauseList/>} />
             <Route path="register" element={<Register />} />
             <Route path="userdashboard" element={<UserDashboard />} />
-
-
-
-
           </Route>
 
           {/* <Route path="judge_lawyer">

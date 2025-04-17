@@ -3,6 +3,7 @@ import Sidebar from "./sidebar/Sidebar";
 import Navbar from "./navbar/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, Button, Form } from "react-bootstrap";
+import "../../src/assets/styles.css"
 
 const UserDashboard = () => {
   const [users, setUsers] = useState([]);
@@ -133,7 +134,7 @@ const UserDashboard = () => {
         <Navbar />
         <div className="container-fluid p-4">
           <div className="d-flex justify-content-between align-items-center mb-3">
-            <h4>Admin User Management</h4>
+            <h4 className=" shimmer-text">Admin User Management</h4>
             <Button variant="primary" onClick={handleCreate}>
               Create User
             </Button>
@@ -239,7 +240,7 @@ const UserDashboard = () => {
       {/* Modal for View/Edit/Create */}
       <Modal show={showModal} onHide={() => setShowModal(false)} centered>
         <Modal.Header closeButton>
-          <Modal.Title>
+          <Modal.Title className="shimmer-text">
             {modalMode === "view"
               ? "User Details"
               : modalMode === "edit"

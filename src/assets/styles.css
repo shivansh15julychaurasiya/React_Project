@@ -1,0 +1,84 @@
+
+/* Animation style */
+.custom-top-right-modal {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    margin: 0;
+    max-width: 400px;
+    z-index: 1055;
+  }
+
+  .modal-backdrop.show {
+    opacity: 0.5;
+  }
+
+  .shimmer-text {
+    background: linear-gradient(
+      90deg,
+rgb(31, 218, 71) 0%,
+      #00bfff 40%,
+rgb(167, 14, 154) 80%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 2.5s linear infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: 200% center;
+    }
+    100% {
+      background-position: -200% center;
+    }
+  }
+
+
+
+ 
+
+
+/* sidebar.css */
+
+.sidebar-container {
+  position: relative;
+  height: 100vh; /* Ensures full screen height */
+  overflow: hidden
+}
+
+.sidebar-strip {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    #1fda47,
+    #00bfff,
+    #a70e9a,
+    #00bfff,
+    #1fda47
+  );
+  background-size: 100% 300%;
+  animation: flowing-water 2S ease-in-out infinite;
+  z-index: 10001;
+  border-radius: 2px;
+
+  /* Glow effect */
+  box-shadow: 0 0 8px rgba(233, 229, 22, 0.6), 0 0 12px rgba(247, 19, 228, 0.4);
+}
+
+@keyframes flowing-water {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
