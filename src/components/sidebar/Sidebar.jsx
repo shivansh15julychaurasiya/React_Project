@@ -14,7 +14,6 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className="sidebar-container">
         {/* Sidebar */}
         <div
           className={`position-fixed top-0 start-0 h-100 bg-light border-end shadow-sm ${
@@ -130,8 +129,7 @@ const Sidebar = () => {
           </ul>
         </div>
 
-        {/* Animated Right Strip */}
-        <div className="sidebar-strip"></div>
+       
 
         {/* Toggle Button */}
         <button
@@ -149,7 +147,7 @@ const Sidebar = () => {
             transition: "margin-left 0.3s ease",
           }}
         ></div>
-      </div>
+
     </>
   );
 };
