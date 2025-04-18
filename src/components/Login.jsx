@@ -1,9 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch("http://localhost:8081/dms/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          username: email, // backend expects username field
+          password: password,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Login failed");
+      }
+
+      const data = await res.json();
+      localStorage.setItem("token", data.token); // Store JWT in localStorage
+
+      console.log(localStorage.getItem("token"));
+
+      // Redirect or show success
+      navigate("/home/userdashboard"); // Or any secured route
+    } catch (err) {
+      console.error(err.message);
+      setErrorMsg("Invalid credentials. Please try again.");
+    }
+  };
+
   const wrapperStyle = {
     height: "100vh",
     backgroundImage:
@@ -39,7 +77,10 @@ const Login = () => {
         <h2 className="text-center mb-4">
           <i className="bi bi-person-circle me-2"></i>Login
         </h2>
-        <form>
+        {errorMsg && (
+          <div className="alert alert-danger py-1 text-center">{errorMsg}</div>
+        )}
+        <form onSubmit={handleLogin}>
           <div className="mb-3">
             <label htmlFor="email" className="form-label">
               Email address
@@ -49,6 +90,9 @@ const Login = () => {
               className="form-control"
               id="email"
               placeholder="Enter email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
             />
           </div>
           <div className="mb-3">
@@ -60,6 +104,9 @@ const Login = () => {
               className="form-control"
               id="password"
               placeholder="Enter password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
             />
           </div>
           <div className="d-grid">
@@ -77,11 +124,23 @@ const Login = () => {
               <i className="bi bi-box-arrow-in-right me-1"></i> Login
             </button>
           </div>
+          <div className="d-grid mt-2">
+            <Link to="/home/login-otp" className="btn btn-outline-secondary">
+              <i className="bi bi-envelope-open me-1"></i> Login with OTP
+            </Link>
+          </div>
           <div className="text-center mt-3 text-light">
             <Link to="/home/forgot" className="text-decoration-none">
               Forgot Password?
             </Link>
           </div>
+
+          {/* <div className="text-center mt-2 text-dark">
+            Don't have an account?{" "}
+            <Link to="/home/register" className="text-decoration-none fw-bold">
+              Register
+            </Link>
+          </div> */}
         </form>
       </div>
     </div>
