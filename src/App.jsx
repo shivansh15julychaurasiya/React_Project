@@ -16,6 +16,7 @@ import EditProfile from "./components/EditProfile";
 import ManageCauseList from "./components/ManageCauseList";
 import Register from "./components/Register";
 import UserDashboard from "./components/UserDashboard";
+import ResetPassword from "./ResetPassword";
 // import { imageListClasses } from "@mui/material";
 
 export default function App() {
@@ -35,6 +36,8 @@ export default function App() {
 
           <Route path="home">
             <Route path="search" element={<Search />} />
+            <Route path="reset" element={<ResetPassword />} />
+
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="login" element={<Login />} />
             <Route path="forgot" element={<ForgotPassword />} />
