@@ -1,61 +1,78 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { Link } from "react-router-dom";
-import {  useNavigate } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
   const [loginId, setLoginId] = useState("");
   const [otp, setOtp] = useState("");
   const [message, setMessage] = useState("");
   const [otpSent, setOtpSent] = useState(false);
+  const [timer, setTimer] = useState(120); // 2 minutes
   const navigate = useNavigate();
 
+  // Start countdown timer after OTP is sent
+  useEffect(() => {
+    let interval;
+    if (otpSent && timer > 0) {
+      interval = setInterval(() => {
+        setTimer((prev) => prev - 1);
+      }, 1000);
+    } else if (timer === 0) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [otpSent, timer]);
+
+  const formatTime = (seconds) => {
+    const m = Math.floor(seconds / 60)
+      .toString()
+      .padStart(2, "0");
+    const s = (seconds % 60).toString().padStart(2, "0");
+    return `${m}:${s}`;
+  };
 
   const handleSendOtp = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8081/dms/auth/request-otp", {
-        login_id: loginId,
-        otp_type: "Reset",
-      });
+      const response = await axios.post(
+        "http://localhost:8081/dms/auth/request-otp",
+        {
+          login_id: loginId,
+          otp_type: "Reset",
+        }
+      );
       console.log(response);
-      setMessage(" OTP has been sent successfully!");
+      setMessage("OTP has been sent successfully!");
+
+      setTimeout(() => setMessage(""), 3000);
       setOtpSent(true);
+      setTimer(120); // Reset timer
     } catch (error) {
       console.error(error);
-      setMessage(" Failed to send OTP. Please check the Login ID.");
+      setMessage("Failed to send OTP. Please check the Login ID.");
     }
   };
-  
 
-  const handleVerifyOtp = async(e) => {
+  const handleVerifyOtp = async (e) => {
     e.preventDefault();
-    // You can add API call here to verify OTP
     try {
-      const response = await axios.post("http://localhost:8081/dms/auth/verify-reset-otp", {
-            username: loginId,
-             otp: otp
-      });
+      const response = await axios.post(
+        "http://localhost:8081/dms/auth/verify-reset-otp",
+        {
+          username: loginId,
+          otp: otp,
+        }
+      );
       console.log(response.data.data.token);
-      // const data = await response.json();
       localStorage.setItem("token", response.data.data.token);
-
-      // const token = localStorage.getItem("token");
-
       navigate("/home/reset");
-
-      setMessage(" OTP has been verified successfully!");
-      setOtpSent(true);
+      setMessage("OTP has been verified successfully!");
     } catch (error) {
       console.error(error);
-      setMessage(" Failed to verify OTP. Please check the Login ID.");
+      setMessage("Failed to verify OTP. Please check the Login ID.");
     }
-    console.log("Verifying OTP:", otp);
-    setMessage("OTP verified! Now you can reset your password.");
-    // Navigate to next step or show password reset fields
   };
 
   return (
@@ -90,6 +107,12 @@ const ForgotPassword = () => {
             : "Enter the OTP sent to your registered contact."}
         </p>
 
+        {otpSent && timer > 0 && (
+          <p className="text-center text-muted mb-3">
+            Time remaining: <strong>{formatTime(timer)}</strong>
+          </p>
+        )}
+
         <form onSubmit={otpSent ? handleVerifyOtp : handleSendOtp}>
           {!otpSent ? (
             <div className="mb-3">
@@ -119,28 +142,45 @@ const ForgotPassword = () => {
                 onChange={(e) => setOtp(e.target.value)}
                 placeholder="Enter OTP"
                 required
+                disabled={timer === 0}
               />
             </div>
           )}
 
           <div className="d-grid">
-            <button
-              type="submit"
-              className="btn btn-danger"
-              onMouseOver={(e) => (e.target.style.backgroundColor = "#e64949")}
-              onMouseOut={(e) => (e.target.style.backgroundColor = "#ff6b6b")}
-              style={{ backgroundColor: "#ff6b6b", border: "none" }}
-            >
-              {otpSent ? (
-                <>
-                  <i className="bi bi-shield-lock me-1"></i> Verify OTP
-                </>
-              ) : (
-                <>
-                  <i className="bi bi-envelope-arrow-up me-1"></i> Send Reset OTP
-                </>
-              )}
-            </button>
+            {!otpSent ? (
+              <button
+                type="submit"
+                className="btn btn-danger"
+                onMouseOver={(e) =>
+                  (e.target.style.backgroundColor = "#e64949")
+                }
+                onMouseOut={(e) => (e.target.style.backgroundColor = "#ff6b6b")}
+                style={{ backgroundColor: "#ff6b6b", border: "none" }}
+              >
+                <i className="bi bi-envelope-arrow-up me-1"></i> Send Reset OTP
+              </button>
+            ) : timer > 0 ? (
+              <button
+                type="submit"
+                className="btn btn-danger"
+                onMouseOver={(e) =>
+                  (e.target.style.backgroundColor = "#e64949")
+                }
+                onMouseOut={(e) => (e.target.style.backgroundColor = "#ff6b6b")}
+                style={{ backgroundColor: "#ff6b6b", border: "none" }}
+              >
+                <i className="bi bi-shield-lock me-1"></i> Verify OTP
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="btn btn-warning"
+                onClick={handleSendOtp}
+              >
+                <i className="bi bi-arrow-clockwise me-1"></i> Resend OTP
+              </button>
+            )}
           </div>
         </form>
 

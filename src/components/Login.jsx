@@ -58,8 +58,8 @@ const Login = () => {
   const cardStyle = {
     backgroundColor: "rgba(255, 255, 255, 0.95)",
     padding: "2rem",
-    borderRadius: "1.5rem",
-    maxWidth: "400px",
+    borderRadius: "2rem",
+    maxWidth: "410px",
     width: "100%",
     boxShadow: "0 4px 20px rgba(0, 0, 0, 0.3)",
   };
@@ -67,20 +67,20 @@ const Login = () => {
   return (
     <div style={wrapperStyle}>
       <div style={cardStyle}>
-        <h2 className="text-center mb-4">
-          <i className="bi bi-person-circle me-2"></i>Login
+        <h2 className="text-center mb-4 fw-bold shimmer-text">
+          <i className="bi bi-person-circle me-2 "></i>Login
         </h2>
         {errorMsg && (
           <div className="alert alert-danger py-1 text-center">{errorMsg}</div>
         )}
         <form onSubmit={handleLogin}>
           <div className="mb-3">
-            <label htmlFor="loginId" className="form-label">
-              User ID
+            <label htmlFor="loginId" className="form-label fw-bold shimmer-text ">
+              User ID:
             </label>
             <input
               type="number"
-              className="form-control"
+              className="form-control "
               id="loginId"
               placeholder="Enter User ID"
               value={loginId}
@@ -89,8 +89,8 @@ const Login = () => {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="password" className="form-label">
-              Password
+            <label htmlFor="password" className="form-label fw-bold shimmer-text ">
+              Password:
             </label>
             <input
               type="password"
@@ -105,18 +105,14 @@ const Login = () => {
           <div className="d-grid">
             <button
               type="submit"
-              className="btn btn-primary login-btn"
+              className="btn btn-primary login-btn "
             >
-              <i className="bi bi-box-arrow-in-right me-1"></i> Login
+              <i className="bi bi-box-arrow-in-right me-1 "></i> Login
             </button>
           </div>
-          <div className="d-grid mt-2">
-            <Link to="/home/login-otp" className="btn btn-outline-secondary">
-              <i className="bi bi-envelope-open me-1"></i> Login with OTP
-            </Link>
-          </div>
+         
           <div className="text-center mt-3">
-            <Link to="/home/forgot" className="text-decoration-none text-dark">
+            <Link to="/home/forgot" className=" text-danger fw-bold shimmer-text">
               Forgot Password?
             </Link>
           </div>
