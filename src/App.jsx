@@ -16,6 +16,7 @@ import EditProfile from "./components/EditProfile";
 import ManageCauseList from "./components/ManageCauseList";
 import Register from "./components/Register";
 import UserDashboard from "./components/UserDashboard";
+import ResetPassword from "./ResetPassword";
 // import { imageListClasses } from "@mui/material";
 
 export default function App() {
@@ -29,10 +30,14 @@ export default function App() {
         <Routes>
           <Route path="/">
             <Route index element={<Login/>} />
+            <Route path="home" element={<Home/>} />
+
           </Route>
 
           <Route path="home">
             <Route path="search" element={<Search />} />
+            <Route path="reset" element={<ResetPassword />} />
+
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="login" element={<Login />} />
             <Route path="forgot" element={<ForgotPassword />} />
@@ -40,10 +45,6 @@ export default function App() {
             <Route path="managecauselist" element={<ManageCauseList/>} />
             <Route path="register" element={<Register />} />
             <Route path="userdashboard" element={<UserDashboard />} />
-
-
-
-
           </Route>
 
           {/* <Route path="judge_lawyer">

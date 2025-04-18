@@ -5,6 +5,12 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import ProfileCard from "../ProfileCard";
 
+import "../../assets/styles.css";
+ // ✅ this should work if styles.css is inside src/assets/
+
+
+
+
 const Navbar = () => {
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
 
@@ -28,34 +34,42 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm px-3 px-md-4">
-        <div className="container-fluid d-flex justify-content-between align-items-center">
-          <a className="navbar-brand fw-bold text-primary px-5" href="#">
+      <nav
+        className="navbar bg-light shadow-sm fixed-top"
+        style={{
+          height: "50px",
+          borderBottom: "0.5px solid rgb(231, 228, 228)",
+          fontSize: "14px",
+          color: "#555",
+          zIndex: 1040,
+        }}
+      >
+        <div className="container-fluid d-flex justify-content-between align-items-center px-4">
+          <a className="navbar-brand fw-bold px-5 shimmer-text" href="#">
             High Court
           </a>
 
           <div className="d-flex align-items-center gap-3">
-            <span className="d-none d-md-inline text-muted small">{formattedDateTime}</span>
+            <div className="d-none d-md-inline text-muted small">{formattedDateTime}</div>
 
             <button
-              type="button"
               className="btn btn-link text-decoration-none"
               data-bs-toggle="modal"
               data-bs-target="#profileModal"
               title="View Profile"
             >
-              <FaUserCircle size={28} className="text-primary" />
+              <FaUserCircle size={26} className="text-primary" />
             </button>
 
-            <span className="fw-semibold d-none d-md-inline">E-High Court</span>
+            <span className="fw-semibold d-none d-md-inline  shimmer-text">E-High Court</span>
           </div>
         </div>
       </nav>
 
       {/* Spacer */}
-      <div style={{ height: "70px" }}></div>
+      <div style={{ height: "50px" }}></div>
 
-      {/* Profile Modal (Top-Right Positioned) */}
+      {/* Profile Modal */}
       <div
         className="modal fade"
         id="profileModal"
@@ -83,21 +97,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Custom CSS */}
-      <style>{`
-        .custom-top-right-modal {
-          position: fixed;
-          top: 20px;
-          right: 20px;
-          margin: 0;
-          max-width: 400px;
-          z-index: 1055;
-        }
-
-        .modal-backdrop.show {
-          opacity: 0.5;
-        }
-      `}</style>
+     
     </>
   );
 };

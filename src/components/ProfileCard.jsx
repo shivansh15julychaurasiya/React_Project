@@ -8,6 +8,7 @@ const ProfileCard = () => {
   const handleLogout = async () => {
     const token = localStorage.getItem("token");
     
+    
 
     try {
       const res = await fetch("http://localhost:8081/dms/auth/logout", {

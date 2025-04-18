@@ -4,7 +4,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const [loginId, setLoginId] = useState(""); // backend expects loginId as username
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const navigate = useNavigate();
@@ -13,14 +13,14 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:8081/dms/auth/login", {
+      const res = await fetch("http://localhost:8081/dms/auth/login-password", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         credentials: "include",
         body: JSON.stringify({
-          username: email, // backend expects username field
+          username: loginId,
           password: password,
         }),
       });
@@ -30,12 +30,14 @@ const Login = () => {
       }
 
       const data = await res.json();
-      localStorage.setItem("token", data.token); // Store JWT in localStorage
+      localStorage.setItem("token", data.data.token);
 
-      console.log(localStorage.getItem("token"));
+      const token = localStorage.getItem("token");
+      console.log(token)
 
-      // Redirect or show success
-      navigate("/home/userdashboard"); // Or any secured route
+
+      // Optional: redirect to dashboard
+      navigate("/home/userdashboard");
     } catch (err) {
       console.error(err.message);
       setErrorMsg("Invalid credentials. Please try again.");
@@ -56,48 +58,39 @@ const Login = () => {
   const cardStyle = {
     backgroundColor: "rgba(255, 255, 255, 0.95)",
     padding: "2rem",
-    borderRadius: "1.5rem",
-    maxWidth: "400px",
+    borderRadius: "2rem",
+    maxWidth: "410px",
     width: "100%",
     boxShadow: "0 4px 20px rgba(0, 0, 0, 0.3)",
-  };
-
-  const btnStyle = {
-    backgroundColor: "#6c63ff",
-    border: "none",
-  };
-
-  const btnHoverStyle = {
-    backgroundColor: "#574fd6",
   };
 
   return (
     <div style={wrapperStyle}>
       <div style={cardStyle}>
-        <h2 className="text-center mb-4">
-          <i className="bi bi-person-circle me-2"></i>Login
+        <h2 className="text-center mb-4 fw-bold shimmer-text">
+          <i className="bi bi-person-circle me-2 "></i>Login
         </h2>
         {errorMsg && (
           <div className="alert alert-danger py-1 text-center">{errorMsg}</div>
         )}
         <form onSubmit={handleLogin}>
           <div className="mb-3">
-            <label htmlFor="email" className="form-label">
-              Email address
+            <label htmlFor="loginId" className="form-label fw-bold shimmer-text ">
+              User ID:
             </label>
             <input
-              type="email"
-              className="form-control"
-              id="email"
-              placeholder="Enter email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="number"
+              className="form-control "
+              id="loginId"
+              placeholder="Enter User ID"
+              value={loginId}
+              onChange={(e) => setLoginId(e.target.value)}
               required
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="password" className="form-label">
-              Password
+            <label htmlFor="password" className="form-label fw-bold shimmer-text ">
+              Password:
             </label>
             <input
               type="password"
@@ -112,29 +105,17 @@ const Login = () => {
           <div className="d-grid">
             <button
               type="submit"
-              className="btn btn-primary"
-              style={btnStyle}
-              onMouseOver={(e) =>
-                (e.target.style.backgroundColor = btnHoverStyle.backgroundColor)
-              }
-              onMouseOut={(e) =>
-                (e.target.style.backgroundColor = btnStyle.backgroundColor)
-              }
+              className="btn btn-primary login-btn "
             >
-              <i className="bi bi-box-arrow-in-right me-1"></i> Login
+              <i className="bi bi-box-arrow-in-right me-1 "></i> Login
             </button>
           </div>
-          <div className="d-grid mt-2">
-            <Link to="/home/login-otp" className="btn btn-outline-secondary">
-              <i className="bi bi-envelope-open me-1"></i> Login with OTP
-            </Link>
-          </div>
-          <div className="text-center mt-3 text-light">
-            <Link to="/home/forgot" className="text-decoration-none">
+         
+          <div className="text-center mt-3">
+            <Link to="/home/forgot" className=" text-danger fw-bold shimmer-text">
               Forgot Password?
             </Link>
           </div>
-
           {/* <div className="text-center mt-2 text-dark">
             Don't have an account?{" "}
             <Link to="/home/register" className="text-decoration-none fw-bold">

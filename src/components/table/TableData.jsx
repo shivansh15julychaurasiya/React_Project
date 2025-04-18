@@ -11,7 +11,7 @@ import axios from 'axios';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 
-export default function List() {
+export default function TableData() {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
   const rowsPerPage = 5;

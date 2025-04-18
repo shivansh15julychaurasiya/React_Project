@@ -1,16 +1,13 @@
 import React from "react";
 import "./home.scss";
 
-// import Chart from '../../components/chart/Chart'
-// import Featured from '../../components/features/Featured'
+
 import Widget from "../../components/widget/Widget";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
-import Featured from "../../components/features/Featured";
-import Table from "../../components/table/Table";
+import Table from "../../components/table/TableData";
 import Widgets from "../../components/widget/Widgets";
-import MyDocument from "../../components/pdf/pdf";
-import DashboardLayout from "../../components/DashboardLayout";
+import TableData from "../../components/table/TableData";
 
 export default function Home() {
   return (
@@ -26,7 +23,7 @@ export default function Home() {
             </div> */}
         <div className="listContainer">
           <div className="listTitle">Latest Transaction</div>
-          <Table />
+          <TableData />
           {/* <DashboardLayout/> */}
         </div>
       </div>
