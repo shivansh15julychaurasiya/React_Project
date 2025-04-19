@@ -14,9 +14,11 @@ import PDFViewer from "./components/pdf/PDFViewer";
 import ForgotPassword from "./components/ForgotPassword";
 import EditProfile from "./components/EditProfile";
 import ManageCauseList from "./components/ManageCauseList";
-import Register from "./components/Register";
+import Register from "./components/CreateUser";
 import UserDashboard from "./components/UserDashboard";
 import ResetPassword from "./ResetPassword";
+import CreateUser from "./components/CreateUser"
+import DashboardLayout from "./components/DashboardLayout";
 // import { imageListClasses } from "@mui/material";
 
 export default function App() {
@@ -24,17 +26,17 @@ export default function App() {
     //  <Home/>
     <div className="App">
       <BrowserRouter>
-        {/* <Routes>
-          <Route path="/pdf" element={<PDFViewer />} />
-        </Routes> */}
-        <Routes>
-          <Route path="/">
-            <Route index element={<Login/>} />
-            <Route path="home" element={<Home/>} />
 
-          </Route>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+
+        <Routes>
+        
 
           <Route path="home">
+          {/* <Route  path="" element={<Home />} /> */}
+
             <Route path="search" element={<Search />} />
             <Route path="reset" element={<ResetPassword />} />
 
@@ -43,7 +45,7 @@ export default function App() {
             <Route path="forgot" element={<ForgotPassword />} />
             <Route path="editprofile" element={<EditProfile/>} />
             <Route path="managecauselist" element={<ManageCauseList/>} />
-            <Route path="register" element={<Register />} />
+            <Route path="create" element={<CreateUser />} />
             <Route path="userdashboard" element={<UserDashboard />} />
           </Route>
 

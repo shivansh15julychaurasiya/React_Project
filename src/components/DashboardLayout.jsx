@@ -2,6 +2,8 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import { PDFViewer } from "@react-pdf/renderer";
 // import PdfComponent from './PdfComponent';
+import  { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "./navbar/Navbar";
 import MyDocument from "./pdf/pdf";
 import FancyAccordion from "./FancyAccordion";
@@ -9,6 +11,19 @@ import PDFHighlighter from "./pdf/PDFHighlighter";
 import PDFViewer from "./pdf/PDFViewer";
 
 const DashboardLayout = () => {
+
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    const token = localStorage.getItem("token"); // or sessionStorage.getItem("token")
+    if (!token) {
+      navigate("/home/login"); // redirect to login if no token
+    }
+  }, [navigate]);
+
+
+
+
   return (
     <div className="flex">
       <Navbar />

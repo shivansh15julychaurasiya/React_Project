@@ -3,6 +3,8 @@ import Sidebar from "./sidebar/Sidebar"; // Make sure Sidebar is in the same fol
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./navbar/Navbar";
 import "../Pages/home/home.scss";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Search = () => {
   //   const [searchTerm, setSearchTerm] = useState('');
@@ -17,6 +19,14 @@ const Search = () => {
   //   const filteredData = data.filter((item) =>
   //     item.name.toLowerCase().includes(searchTerm.toLowerCase())
   //   );
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token"); // or sessionStorage.getItem("token")
+    if (!token) {
+      navigate("/home/login"); // redirect to login if no token
+    }
+  }, [navigate]);
 
   return (
     <div className="home">

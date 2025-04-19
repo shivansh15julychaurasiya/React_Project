@@ -1,14 +1,23 @@
-import React from 'react';
-
+import React, { useEffect } from "react";
 
 const ProfileCard = () => {
 
+  
+  //  Listen for logout across tabs
+  useEffect(() => {
+    const handleStorageChange = (event) => {
+      if (event.key === "logout") {
+        localStorage.removeItem("token");
+        window.location.href = "/home/login";
+      }
+    };
 
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
 
   const handleLogout = async () => {
     const token = localStorage.getItem("token");
-    
-    
 
     try {
       const res = await fetch("http://localhost:8081/dms/auth/logout", {
@@ -18,13 +27,12 @@ const ProfileCard = () => {
         },
       });
 
-      // if (!res.ok) throw new Error("Logout failed");
-
       const data = await res.json();
       console.log("Logout success:", data.message);
 
-      // Clear local storage and redirect
+      //  Notify other tabs + clear token
       localStorage.removeItem("token");
+      localStorage.setItem("logout", Date.now().toString());
 
       window.location.href = "/home/login";
     } catch (error) {
@@ -33,15 +41,13 @@ const ProfileCard = () => {
     }
   };
 
-
-  const handleProfile=()=>{
+  const handleProfile = () => {
     window.location.href = "/home/editprofile";
-
-  }
+  };
 
   return (
     <div className="container d-flex justify-content-center mt-5">
-      <div className="card p-4 shadow-lg rounded-4" style={{ maxWidth: '400px' }}>
+      <div className="card p-4 shadow-lg rounded-4" style={{ maxWidth: "400px" }}>
         <div className="d-flex flex-column align-items-center text-center">
           <img
             src="https://cdn.pixabay.com/photo/2022/09/08/15/16/cute-7441224_1280.jpg"
@@ -66,7 +72,10 @@ const ProfileCard = () => {
               Log-out
             </button>
 
-            <button className="btn btn-success btn-sm px-4 rounded-pill" onClick={handleProfile}>
+            <button
+              className="btn btn-success btn-sm px-4 rounded-pill"
+              onClick={handleProfile}
+            >
               <i className="bi bi-pencil p-2"></i>
               Edit Profile
             </button>

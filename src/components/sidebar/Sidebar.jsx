@@ -65,6 +65,22 @@ const Sidebar = () => {
                   </li>
                   <li className="nav-item">
                     <Link
+                      to="/home/userdashboard"
+                      className="nav-link text-dark px-2"
+                    >
+                      Manage Users
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link
+                      to="/home/managecauselist"
+                      className="nav-link text-dark px-2"
+                    >
+                      Manage CauseList
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link
                       to="/cases_mgmt/assignedCase"
                       className="nav-link text-dark px-2"
                     >
