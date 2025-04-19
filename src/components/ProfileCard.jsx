@@ -1,9 +1,40 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 const ProfileCard = () => {
+  const [user, setUser] = useState(null);
 
-  
-  //  Listen for logout across tabs
+  //  Fetch user data when component loads
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        setUser(null);
+        return;
+      }
+
+      try {
+        const res = await fetch("http://localhost:8081/dms/users/me", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!res.ok) throw new Error("Unauthorized");
+
+        const data = await res.json();
+        setUser(data); //  user data available here
+        console.log(data)
+      } catch (error) {
+        console.error("Error fetching user:", error.message);
+        setUser(null);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  // Listen for logout in other tabs
   useEffect(() => {
     const handleStorageChange = (event) => {
       if (event.key === "logout") {
@@ -30,7 +61,6 @@ const ProfileCard = () => {
       const data = await res.json();
       console.log("Logout success:", data.message);
 
-      //  Notify other tabs + clear token
       localStorage.removeItem("token");
       localStorage.setItem("logout", Date.now().toString());
 
@@ -56,29 +86,39 @@ const ProfileCard = () => {
             width="100"
             height="100"
           />
-          <h4 className="mb-0">Vijay Chaurasiya</h4>
-          <small className="text-muted mb-3">Java FullStack Developer</small>
+          <h4 className="mb-0">{user ? user.name : "Guest"}</h4>
+          <small className="text-muted mb-3">
+            {user ? user.email : "Please login to view your details"}
+          </small>
 
           <p className="text-center text-muted">
-            Passionate developer with a love for building beautiful and functional user interfaces.
+            {user ? user.about : "You are viewing the profile as a guest."}
           </p>
 
           <div className="d-flex gap-2">
-            <button
-              className="btn btn-primary px-4 rounded-pill"
-              onClick={handleLogout}
-            >
-              <i className="bi bi-box-arrow-right p-2 btn-sm"></i>
-              Log-out
-            </button>
+            {user ? (
+              <>
+                <button
+                  className="btn btn-primary px-4 rounded-pill"
+                  onClick={handleLogout}
+                >
+                  <i className="bi bi-box-arrow-right p-2 btn-sm"></i>
+                  Log-out
+                </button>
 
-            <button
-              className="btn btn-success btn-sm px-4 rounded-pill"
-              onClick={handleProfile}
-            >
-              <i className="bi bi-pencil p-2"></i>
-              Edit Profile
-            </button>
+                <button
+                  className="btn btn-success btn-sm px-4 rounded-pill"
+                  onClick={handleProfile}
+                >
+                  <i className="bi bi-pencil p-2"></i>
+                  Edit Profile
+                </button>
+              </>
+            ) : (
+              <a href="/home/login" className="btn btn-outline-primary rounded-pill px-4">
+                Login
+              </a>
+            )}
           </div>
         </div>
       </div>
