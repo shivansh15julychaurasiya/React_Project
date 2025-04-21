@@ -23,7 +23,7 @@ export default function App() {
   return (
     //  <Home/>
     <div className="App">
-      <BrowserRouter>
+      <BrowserRouter basename="/dms">
         {/* <Routes>
           <Route path="/pdf" element={<PDFViewer />} />
         </Routes> */}
